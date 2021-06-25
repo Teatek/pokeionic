@@ -19,7 +19,6 @@ export class Tab1Page implements OnInit {
 
   async ngOnInit() {
     this.step = 20;
-    console.log(this.step);
     this.pokemons = await this.apiService.getPokemons(this.offset, this.step);
     this.offset += this.step;
     this.nbPokemons = this.apiService.getNumberOfPokemons();

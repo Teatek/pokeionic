@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let pokemon of pokemons">
+      <ion-item routerLink="['../../', 'details', {{pokemon.id}}]" *ngFor="let pokemon of pokemons">
       <ion-avatar item-start>
           <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.id}}.png" />
       </ion-avatar>

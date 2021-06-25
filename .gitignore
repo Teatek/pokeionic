@@ -9,6 +9,7 @@
 *.sublime-project
 *.sublime-workspace
 .DS_Store
+package-lock.json
 Thumbs.db
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
@@ -18,6 +19,7 @@ log.txt
 npm-debug.log*
 
 /.idea
+/.vim
 /.ionic
 /.sass-cache
 /.sourcemaps

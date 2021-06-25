@@ -23,11 +23,27 @@ export class ApiService {
       }
       return pokemons;
     } else {
-      throw new Error('Impossible d\'obtenir les données.');
+      throw new Error('Impossible d\'obtenir les pokémons.');
     }
   }
 
+  async getPokemon(id: number): Promise<Pokemon> | never {
+      console.log(id);
+    const request: any = await this.http.get(
+      `https://pokeapi.co/api/v2/pokemon/${id}`)
+          .toPromise();
+      if(request) {
+          console.log(request);
+          const pokemon: Pokemon = new Pokemon(id, request.name);
+          pokemon.setWeight(request.weight);
+          pokemon.setHeight(request.height);
+          return pokemon;
+      } else {
+          throw new Error('Impossible d\'obtenir le pokémon.');
+      }
+  }
+
   getNumberOfPokemons(): number {
-      return this.nbPokemons;
+    return this.nbPokemons;
   }
 }
