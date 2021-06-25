@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {Router} from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { ApiService } from '../api.service';
 import { Pokemon } from '../pokemon';
@@ -15,7 +16,7 @@ export class Tab1Page implements OnInit {
   step: number;
   nbPokemons: number;
 
-  constructor(private apiService: ApiService) {}
+  constructor(public router: Router, private apiService: ApiService) {}
 
   async ngOnInit() {
     this.step = 20;
@@ -39,6 +40,16 @@ export class Tab1Page implements OnInit {
   async getData() {
     this.pokemons = this.pokemons.concat(await this.apiService.getPokemons(this.offset, this.step));
     this.offset += this.step;
+  }
+
+  details(id: number) {
+      this.router.navigate(['details/', id]);
+  }
+
+  addToFavorites(id: number) {
+      // TODO: ajouter un toast + ajouter dans le storage
+     const pkm: Pokemon = this.pokemons[id-1];
+     pkm.setIsBookmarked(!pkm.getIsBookmarked());
   }
 
   toggleInfiniteScroll() {

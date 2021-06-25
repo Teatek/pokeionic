@@ -4,10 +4,15 @@ export class Pokemon {
   private type: string[];
   private height: number;
   private weight: number;
+  private isBookmarked: boolean;
 
   constructor(id: number, name: string) {
       this.id = id;
       this.name = name;
+      this.type = [];
+      this.weight = 0;
+      this.height = 0;
+      this.isBookmarked = false;
   }
 
   getId(): number {
@@ -30,6 +35,10 @@ export class Pokemon {
     return this.weight;
   }
 
+  getIsBookmarked(): boolean {
+    return this.isBookmarked;
+  }
+
   setId(id: number) {
       this.id = id;
   }
@@ -48,5 +57,9 @@ export class Pokemon {
 
   setWeight(weight: number) {
       this.weight = weight;
+  }
+
+  setIsBookmarked(isBookmarked: boolean) {
+    this.isBookmarked = isBookmarked;
   }
 }

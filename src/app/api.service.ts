@@ -19,7 +19,8 @@ export class ApiService {
       for (const result of request.results) {
         const url: string[] = result.url.split('/');
         const id: number = +url[url.length - 2];
-        pokemons.push(new Pokemon(id, result.name));
+        // TODO: get info if bookmarked or not
+        pokemons.push(new Pokemon(id, this.capitalize(result.name)));
       }
       return pokemons;
     } else {
@@ -28,19 +29,22 @@ export class ApiService {
   }
 
   async getPokemon(id: number): Promise<Pokemon> | never {
-      console.log(id);
     const request: any = await this.http.get(
       `https://pokeapi.co/api/v2/pokemon/${id}`)
           .toPromise();
       if(request) {
-          console.log(request);
-          const pokemon: Pokemon = new Pokemon(id, request.name);
-          pokemon.setWeight(request.weight);
-          pokemon.setHeight(request.height);
+          const pokemon: Pokemon = new Pokemon(id, this.capitalize(request.name));
+          // TODO: get info if bookmarked or not
+          pokemon.setWeight(request.weight / 10);
+          pokemon.setHeight(request.height / 10);
           return pokemon;
       } else {
           throw new Error('Impossible d\'obtenir le pokémon.');
       }
+  }
+
+  capitalize(str: string) {
+    return str[0].toUpperCase() + str.slice(1);
   }
 
   getNumberOfPokemons(): number {
